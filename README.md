@@ -9,7 +9,7 @@
 <a href="https://github.com/chaeyeon-h">
   <img src="https://avatars.githubusercontent.com/u/102357623?v=4" width="100" />
 </a>
-<a href="https://github.com/mattie3e">
+<a href="https://github.com/tenaan">
   <img src="https://avatars.githubusercontent.com/u/76553265?v=4" width="100" />
 </a>
 
