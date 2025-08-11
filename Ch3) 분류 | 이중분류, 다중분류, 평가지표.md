@@ -373,4 +373,11 @@ plt.plot(fpr_90, tpr_90, "ko", label="90% 정밀도 지점")
 
 
 
+---
 
+### Study Notes
+이은정 : https://velog.io/@dkan9634/HandsOnML-Chapter-3.-%EB%B6%84%EB%A5%98
+
+안태현 : https://armugona.tistory.com/entry/%ED%95%B8%EC%A6%88%EC%98%A8-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-Ch3-%EB%B6%84%EB%A5%98-Confusion-Matrix-Recall-Precision-F1-Score-AUC-ROC
+
+허채연 : https://velog.io/@algorithm_cell/HOML-3%EC%9E%A5-%EB%B6%84%EB%A5%98
