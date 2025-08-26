@@ -1,6 +1,6 @@
 4장은 양이 많기 때문에 2번에 걸쳐서 다룬다.
-1부에서는 4.1~4.4
-2부에서는 4.5~4.6
+1부에서는 4.1 ~ 4.4
+2부에서는 4.5 ~ 4.6
 
 모델을 훈련시키는 방법으로 손실 함수의 개념과 이 손실 함수를 최소화하기 위한 대표적인 기법으로 경사하강법에 대해서 소개한다.
 데이터에 적합한 복잡도의 모델을 찾는 관점에서 손실 함수(오차)를 활용할 수 있음을 보이며, 이 손실 함수의 변화를 관찰함으로써 과대적합 Overfitting, 과소적합 Underfitting을 판단하고자 한다.
@@ -171,3 +171,9 @@ SGD보다 더 부드럽게 수렴하지만, 때로는 지역 최솟값에서 빠
  
 
 모델의 복잡도가 커지면 분산은 커지고 편향은 작아지지만, 복잡도가 작아지면 분산은 작아지고, 편향은 커지는 Tradeoff 관계이다.
+
+---
+### Study Notes
+[이은정](https://velog.io/@dkan9634/HandsOnML-Chap-4.-모델훈련1)
+[안태현](https://armugona.tistory.com/entry/%ED%95%B8%EC%A6%88%EC%98%A8-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-Ch4-%EB%AA%A8%EB%8D%B8-%ED%9B%88%EB%A0%A8-12-%EC%86%90%EC%8B%A4-%ED%95%A8%EC%88%98-%EA%B2%BD%EC%82%AC%ED%95%98%EA%B0%95%EB%B2%95-BGD-SGD-MGD-Bias-Variance-Tradeoff?category=1256688) 
+[허채연](https://velog.io/@algorithm_cell/%ED%95%B8%EC%A6%88%EC%98%A8-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-ch4-1.-%EB%AA%A8%EB%8D%B8-%ED%9B%88%EB%A0%A8)
