@@ -98,8 +98,7 @@ poly_kernel_svm_clf.fit(X, y)
 
   - 랜드마크의 영향력의 범위가 넓어진다는 의미 
   - 결정경계가 부드러워진다 → 과대적합을 해결 (C와 비슷)
-    
-**0.3은 적절한 수준**
+  - **0.3은 적절한 수준**
 
 
 ### 4. 가우스 RBF 커널
@@ -158,7 +157,9 @@ rbf_kernel_svm_clf.fit(X, y)
 **SVM 회귀**의 목표
 
   : 가능한 한 많은 샘플이 마진 안에 포함되도록하는 최적의 회귀선을 찾는 것
+  
   : 제한된 오류 내에서 이 오류를 최소화하고 최대한 많은 샘플이 마진 안에 들어오도록 하는 것
+  
 - 경계의 폭은 **ε**으로 조절
 
 ![](https://velog.velcdn.com/images/algorithm_cell/post/6915a606-ebff-4928-bc40-f8e2f5d7ce4b/image.png)
@@ -182,3 +183,77 @@ svm_reg.fit(X, y)
   - 이 함수는 예측값과 실제값의 차이가 ϵ 범위 안에 있으면 손실을 0으로 간주
 
 ---
+## SVM 이론
+- **SVM 훈련 목표**  
+ 
+1) 제한된 마진 오류에서 마진을 가능한 한 넓게 만드는 가중치 벡터(W)와 편향(b)을 찾는 것 *(소프트마진)*
+2) 마진 오류를 일으키지 않는 것 *(하드마진)*
+
+- **제약조건** : 결정 함수가 모든 양성 훔련 샘플에서는 1보다 커야하고, 음성 훈련 샘플에서는 -1보다 작아야함
+
+    - 음성 샘플 ($y^{(i)}=0$)일 때 $t^{(i)}=-1$
+    - 양성 샘플 ($y^{(i)}=1$)일 때 $t^{(i)}=1$
+    - 제약 조건을 모든 샘플에서 $t^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)}+b) \ge 1$로 표현할 수 있음
+ 
+- 학습
+학습과정에서는 마진 오류를 줄이며 마진을 가능한 한 넓게 만드는 가중치 벡터 W와 편향 b 를 찾아야 함
+<img width="1278" height="442" alt="image" src="https://github.com/user-attachments/assets/1c840fd9-ec0e-4192-a316-145da19efd42" />
+
+- 마진을 더 넓게 만들기 위해서는 W를 가능한 한 작게 유지
+- 편향 b 는 마진의 크기에는 영향을 미치지 않고 위치만 이동
+- 
+### 1. 하드 마진 선형 SVM
+
+$$\underset{\mathbf{w},b}{\text{minimize}} \quad \frac{1}{2}\mathbf{w}^T\mathbf{w}$$
+
+### 2. 소프트 마진 선형 SVM
+
+- 목적 함수를 구성하려면 **슬랙 변수(ξ)**를 도입해야함
+- **ξ** : i번째 샘플이 얼마나 마진을 위반할 지 정함
+  - 목표
+      1) 마진 오류를 최소화 -> ξ를 작게 만들어야함
+      2) 마진을 크게 하기 위해 -> $\quad \frac{1}			{2}\mathbf{w}^T\mathbf{w}$ 를 최소화
+    	-> C를 통해 두 목표 사이의 trade-off를 정의함
+
+
+$$
+\underset{\mathbf{w},b,\zeta}{\text{minimize}} 
+\quad  
+\frac{1}{2}\mathbf{w}^T\mathbf{w} 
++ 
+C \sum_{i=1}^{m}\zeta^{(i)}
+$$
+
+$$
+\text{subject to} \quad
+t^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)}+b) \ge 1-\zeta^{(i)}, \;
+\zeta^{(i)} \ge 0, \;
+i=1,2,\cdots,m
+$$
+
+
+---
+## 쌍대문제 *Dual Problem*
+- *primal problem* : 등식과 부등식 제약조건이 있는 본래의 최적화 문제
+- 제약이 있는 최적화 문제인 원 문제 Primal Problem 은 쌍대 문제 Dual Problem 라고 하는 다른 문제로 표현할 수 있음
+- Primal Problem이 W와 b 를 직접 찾아내는 것이라면, Dual Problem은 라그랑주 승수법으로 라그랑주 승수를 찾아내는 문제로 변환됨
+
+	- **특정 조건 하에서 Dual Problem의 해가 Primal Problem의 해와 동일하며, SVM이 이에 해당함**
+ 	- 즉, **Dual Problem으로 풀어도 원하는 W와 b 를 정확히 얻을 수 있음**
+
+- 훈련 sample수가 feature수보다 작다면, dual problem을 푸는 것이 더 빠름
+- primal problem에는 커널 트릭이 적용 안되지만, dual problem에서는 적용이 됨
+	
+
+
+
+
+---
+### Study Notes
+[이은정](https://velog.io/@dkan9634/HandsOnML-Chap-5.-%EC%84%9C%ED%8F%AC%ED%8A%B8-%EB%B2%A1%ED%84%B0-%EB%A8%B8%EC%8B%A0)
+
+[안태현-1](https://armugona.tistory.com/entry/%ED%95%B8%EC%A6%88%EC%98%A8-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-Ch5-SVM-12-%EC%84%A0%ED%98%95-SVM-%EB%B9%84%EC%84%A0%ED%98%95-SVM-%EC%BB%A4%EB%84%90-%ED%8A%B8%EB%A6%AD-%EA%B0%80%EC%9A%B0%EC%8A%A4-RBF-%ED%95%A8%EC%88%98-SVM-%ED%9A%8C%EA%B7%80?category=1256688)
+[안태현-2](https://armugona.tistory.com/entry/%ED%95%B8%EC%A6%88%EC%98%A8-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-Ch5-SVM-22-%EC%8A%AC%EB%9E%99-%EB%B3%80%EC%88%98-%EC%8C%8D%EB%8C%80-%EB%AC%B8%EC%A0%9C-%EC%BB%A4%EB%84%90-%ED%8A%B8%EB%A6%AD-%EB%9D%BC%EA%B7%B8%EB%9E%91%EC%A3%BC-%EC%8A%B9%EC%88%98%EB%B2%95)
+
+[허채연](https://velog.io/@algorithm_cell/%ED%95%B8%EC%A6%88%EC%98%A8-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-ch5.-%EC%84%9C%ED%8F%AC%ED%8A%B8-%EB%B2%A1%ED%84%B0-%EB%A8%B8%EC%8B%A0)
+
